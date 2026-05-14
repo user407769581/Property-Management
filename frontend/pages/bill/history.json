@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "已缴账单",
+  "usingComponents": {
+    "login-popup": "/components/login-popup/index"
+  }
+}

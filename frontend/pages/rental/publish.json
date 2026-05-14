@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "发布租房",
+  "usingComponents": {
+    "login-popup": "/components/login-popup/index"
+  }
+}

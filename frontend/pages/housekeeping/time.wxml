@@ -1,0 +1,35 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view class="hk-sec-title">1. 选择服务日期</view>
+    <scroll-view scroll-x="{{true}}" class="hk-date-scroll" show-scrollbar="{{false}}">
+      <view class="hk-date-row">
+        <view
+          wx:for="{{dateOptions}}"
+          wx:key="date"
+          class="hk-date-pill {{selectedDate === item.date ? 'sel' : ''}} {{item.isToday ? 'today' : ''}}"
+          bindtap="selectDate"
+          data-date="{{item.date}}"
+        >
+          <text class="hk-date-line1">{{item.label}}</text>
+          <text class="hk-date-line2">{{item.sub}}{{item.isToday ? ' · 今天' : ''}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="hk-sec-title hk-sec-title--2">2. 选择上门时间</view>
+    <view wx:if="{{!selectedDate}}" class="hk-time-hint">请先在上方的日期中选择一天</view>
+    <view wx:elif="{{!displayTimes.length}}" class="hk-time-hint">当天可预约时段已满，请更换日期</view>
+    <view class="time-grid" wx:else>
+      <view
+        class="tm {{selectedTime === t ? 'sel' : ''}}"
+        wx:for="{{displayTimes}}"
+        wx:for-item="t"
+        wx:key="*this"
+        bindtap="selectTime"
+        data-time="{{t}}"
+      >{{t}}</view>
+    </view>
+
+    <button class="btn bp" bindtap="goNext" style="margin-top:22px">下一步 · 确认信息</button>
+  </view>
+</view>

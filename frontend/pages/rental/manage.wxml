@@ -1,0 +1,26 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view wx:if="{{!rentals.length}}" class="card" style="text-align:center;color:var(--g5)">暂无已发布或草稿房源</view>
+    <view wx:for="{{rentals}}" wx:key="id" class="card" style="margin-bottom:12px">
+      <view class="manage-rent-thumb-wrap">
+        <image wx:if="{{item.coverUrl}}" class="manage-rent-thumb" src="{{item.coverUrl}}" mode="aspectFill" />
+        <view wx:else class="manage-rent-thumb manage-rent-thumb-ph">
+          <view class="manage-rent-icon"></view>
+        </view>
+      </view>
+      <view class="fb" style="margin-top:10px">
+        <view>
+          <view style="font-size:14px;font-weight:600">{{item.title}}</view>
+          <view style="font-size:11px;color:var(--g5);margin-top:4px">{{item.address}} · ¥{{item.price}}/月</view>
+        </view>
+        <text class="badge {{item.status === 'PUBLISHED' ? 'bd' : item.status === 'OFFLINE' ? 'bc' : 'bi'}}">{{item.statusText}}</text>
+      </view>
+      <view style="display:flex;gap:10px;margin-top:12px">
+        <button wx:if="{{item.status !== 'PUBLISHED'}}" size="mini" class="btn bp" data-id="{{item.id}}" data-action="publish" bindtap="changeStatus">发布</button>
+        <button wx:if="{{item.status === 'PUBLISHED'}}" size="mini" class="btn" style="background:#fff;color:var(--org);border:1px solid rgba(196,136,92,.3)" data-id="{{item.id}}" data-action="unpublish" bindtap="changeStatus">下架</button>
+        <button size="mini" class="btn" style="background:#fff;color:var(--red);border:1px solid rgba(205,92,92,.3)" data-id="{{item.id}}" bindtap="removeRental">删除</button>
+      </view>
+    </view>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

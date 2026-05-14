@@ -1,0 +1,73 @@
+/* 自定义选择面板：浅色圆角 + 主色按钮，无系统 picker 深色底栏 */
+.bind-sheet-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  background: transparent;
+  display: flex;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+.bind-sheet {
+  width: 100%;
+  max-height: 60vh;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08), 0 -12px 48px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.bind-sheet-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 18px 20px 10px;
+  color: var(--bk);
+  flex-shrink: 0;
+}
+.bind-sheet-scroll {
+  height: 400rpx;
+  max-height: 42vh;
+  flex-shrink: 0;
+}
+.bind-sheet-row {
+  padding: 16px 20px;
+  font-size: 15px;
+  color: var(--g7);
+  border-bottom: 1px solid var(--g1);
+}
+.bind-sheet-row:last-child {
+  border-bottom: none;
+}
+.bind-sheet-row--on {
+  color: var(--gold);
+  font-weight: 600;
+  background: rgba(197, 165, 114, 0.08);
+}
+.bind-sheet-actions {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  padding-bottom: calc(16px + constant(safe-area-inset-bottom));
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  flex-shrink: 0;
+}
+.bind-sheet-btn {
+  flex: 1;
+  margin: 0;
+}
+.bind-sheet-btn::after {
+  border: none;
+}
+.bind-sheet-btn-cancel {
+  background: var(--g0) !important;
+  color: var(--g7) !important;
+}
+/* 登录手机号只读展示 */
+.bind-login-phone {
+  color: var(--g7);
+  line-height: 44px;
+  background: var(--g1);
+  border-color: var(--g2);
+}

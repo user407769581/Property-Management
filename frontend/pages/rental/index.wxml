@@ -1,0 +1,22 @@
+<view class="page-container">
+  <view style="display:flex; justify-content:flex-end; gap:18px; padding:10px 20px;">
+    <view style="font-size:13px;color:var(--g5);font-weight:500;cursor:pointer;letter-spacing:.3px" bindtap="goManage">我的房源</view>
+    <view style="font-size:13px;color:var(--gold);font-weight:500;cursor:pointer;letter-spacing:.3px" bindtap="goPublish">发布 +</view>
+  </view>
+  
+  <view style="padding-top:8px">
+    <view class="rent" wx:for="{{rentals}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="rent-img" style="background:{{item.bg}}">
+        <image wx:if="{{item.coverUrl}}" class="rent-cover" src="{{item.coverUrl}}" mode="aspectFill" />
+        <view class="rent-icon" wx:else></view>
+        <view class="rent-pr">¥{{item.price}}/月</view>
+      </view>
+      <view style="padding:11px 14px">
+        <view style="font-size:14px;font-weight:600;margin-bottom:4px">{{item.title}}</view>
+        <view style="display:flex;gap:5px">
+          <text class="chip" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

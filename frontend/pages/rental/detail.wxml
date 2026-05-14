@@ -1,0 +1,23 @@
+<view class="page-sub" wx:if="{{detail}}">
+  <view wx:if="{{detail.gallery.length}}" class="rental-detail-swiper-wrap">
+    <swiper class="rental-detail-swiper" indicator-dots="{{detail.gallery.length > 1}}" autoplay="{{false}}" circular="{{detail.gallery.length > 1}}">
+      <swiper-item wx:for="{{detail.gallery}}" wx:key="*this">
+        <image class="rental-detail-slide-img" src="{{item}}" mode="aspectFill" />
+      </swiper-item>
+    </swiper>
+  </view>
+  <view wx:else class="rental-detail-placeholder">
+    <view class="icon-pic"></view>
+  </view>
+  <view style="padding:20px">
+    <view style="font-size:26px;font-weight:700;color:var(--gold)">¥{{detail.rent}}<text style="font-size:13px;font-weight:400;color:var(--g5)">/月</text></view>
+    <view style="font-size:17px;font-weight:600;margin-top:6px">{{detail.title}}</view>
+    <view style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+      <text class="chip">{{detail.layout}}</text><text class="chip">{{detail.area}}㎡</text><text class="chip">{{detail.statusText}}</text>
+    </view>
+    <view class="dv"></view>
+    <view style="font-size:14px;font-weight:600;margin-bottom:6px">房屋描述</view>
+    <view style="font-size:13px;color:var(--g7);line-height:1.8">{{detail.address}}</view>
+    <button class="btn bp" bindtap="call" style="margin-top:18px">联系房东</button>
+  </view>
+</view>

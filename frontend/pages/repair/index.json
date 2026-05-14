@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "报事报修",
+  "usingComponents": {
+    "login-popup": "/components/login-popup/index"
+  }
+}

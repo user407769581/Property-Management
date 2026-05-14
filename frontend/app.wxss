@@ -1,0 +1,147 @@
+page {
+  --gold: #C5A572;
+  --gl: #D4BC8B;
+  --gd: #A68B5B;
+  --bk: #1A1A1A;
+  --dk: #2C2C2C;
+  --g7: #555555;
+  --g5: #888888;
+  --g3: #BBBBBB;
+  --g2: #DDDDDD;
+  --g1: #F0EDE8;
+  --g0: #F8F6F3;
+  --bg: #FAFAF8;
+  --red: #C45C5C;
+  --grn: #5C8A6E;
+  --blu: #5C7EA8;
+  --org: #C4885C;
+  --ff: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --sh: 0 2px 12px rgba(0, 0, 0, .06);
+  --R: 12px;
+  --Rs: 8px;
+
+  font-family: var(--ff);
+  background-color: var(--bg);
+  color: var(--bk);
+  line-height: 1.6;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+view, text, image, navigator, input, textarea, button {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.page-container {
+  min-height: 100vh;
+  background: var(--bg);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 72px); 
+}
+.page-sub {
+  min-height: 100vh;
+  background: var(--bg);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 30px);
+}
+
+/* Common Components */
+.card { background: #fff; border-radius: var(--R); padding: 16px; margin: 0 20px 10px; box-shadow: var(--sh); }
+.sec { font-size: 14px; font-weight: 600; margin: 18px 20px 10px; letter-spacing: .3px; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+.bw { background: #FFF3E0; color: var(--org); }
+.bi { background: #E3F2FD; color: var(--blu); }
+.bd { background: #E8F5E9; color: var(--grn); }
+.br { background: #FFEBEE; color: var(--red); }
+.bc { background: #F5F5F5; color: var(--g5); }
+
+.btn { display: flex; align-items: center; justify-content: center; padding: 13px; border-radius: var(--R); font-size: 15px; font-weight: 500; width: 100%; transition: .2s; letter-spacing: .5px; border: none; }
+.bp { background: var(--gold); color: #fff; }
+.bp:active { background: var(--gd); transform: scale(.98); }
+.bk-btn { background: var(--bk); color: #fff; }
+.bk-btn:active { background: var(--dk); transform: scale(.98); }
+.bo { border: 1.5px solid var(--gold); color: var(--gold); background: transparent; }
+
+.fg { margin-bottom: 16px; }
+.fl { font-size: 12px; color: var(--g5); margin-bottom: 5px; display: block; font-weight: 500; letter-spacing: .3px; }
+.fi { width: 100%; padding: 0 14px; background: var(--g0); border: 1.5px solid transparent; border-radius: var(--Rs); font-size: 14px; color: var(--bk); transition: .2s; box-sizing: border-box; height: 44px; line-height: 44px; }
+.fi:focus { border-color: var(--gold); background: #fff; }
+.fi-textarea { height: auto; min-height: 88px; line-height: 1.6; padding: 12px 14px; }
+.fs { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+
+.fb { display: flex; justify-content: space-between; align-items: center; }
+.dv { height: 1px; background: var(--g1); margin: 14px 0; }
+.chip { display: inline-block; padding: 3px 9px; border-radius: 14px; font-size: 11px; background: var(--g0); color: var(--g7); margin-right: 5px; }
+.notif { width: 7px; height: 7px; background: var(--red); border-radius: 50%; position: absolute; top: 2px; right: 2px; }
+
+/* Service Card common */
+.sc { background: #fff; border-radius: var(--R); padding: 14px; margin-bottom: 8px; box-shadow: var(--sh); display: flex; align-items: flex-start; gap: 11px; transition: .15s; }
+.sc:active { transform: scale(.98); }
+.sca { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sci { flex: 1; min-width: 0; }
+.sct { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.scm { font-size: 11px; color: var(--g5); }
+.scr { text-align: right; flex-shrink: 0; }
+.scti { font-size: 10px; color: var(--g3); margin-top: 4px; }
+
+/* 本地选图网格（发布房源、报修等共用，与发布页逻辑一致） */
+.mp-photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+}
+.mp-photo-cell {
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: var(--Rs);
+  overflow: hidden;
+  background: var(--g0);
+}
+.mp-photo-img {
+  width: 200rpx;
+  height: 200rpx;
+  display: block;
+}
+.mp-photo-del {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 300;
+}
+.phadd {
+  width: 72px;
+  height: 72px;
+  border: 1.5px dashed var(--g3);
+  border-radius: var(--Rs);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.15s;
+}
+.phadd:active {
+  border-color: var(--gold);
+  transform: scale(0.95);
+}
+.phadd text {
+  font-size: 10px;
+  color: var(--g3);
+  margin-top: 3px;
+}
+.icon-add {
+  width: 20px;
+  height: 20px;
+  background-color: var(--g3);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' stroke='black' stroke-width='1.5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
+  -webkit-mask-size: cover;
+}

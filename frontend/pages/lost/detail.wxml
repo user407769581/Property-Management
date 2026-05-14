@@ -1,0 +1,46 @@
+<view class="page-sub" wx:if="{{detail}}">
+  <view style="padding:20px">
+    <view class="fb" style="margin-bottom:16px">
+      <view>
+        <view style="font-size:11px;color:var(--g5);letter-spacing:.5px">工单号</view>
+        <view style="font-size:16px;font-weight:600;margin-top:2px">{{detail.orderNo}}</view>
+      </view>
+      <text class="badge {{detail.status === 'HANDLED' ? 'bd' : 'bc'}}">{{detail.statusText}}</text>
+    </view>
+    <view class="card" style="margin:0 0 10px">
+      <view style="font-size:13px;font-weight:600;margin-bottom:8px">登记信息</view>
+      <view style="font-size:12px;color:var(--g7);line-height:2.2">
+        <view class="fb"><text style="color:var(--g5)">物品描述</text><text style="flex:1;text-align:right">{{detail.itemName}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">丢失时间</text><text style="flex:1;text-align:right">{{detail.lostAt}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">丢失地点</text><text style="flex:1;text-align:right">{{detail.location}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">预留电话</text><text style="flex:1;text-align:right">{{detail.phone}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">提交时间</text><text style="flex:1;text-align:right">{{detail.createdAtDisplay}}</text></view>
+      </view>
+    </view>
+    <view style="font-size:13px;font-weight:600;margin:16px 0 10px">处理进度</view>
+    <view class="tli">
+      <view class="tld"><view class="icon-chk"></view></view>
+      <view style="flex:1;padding-top:3px">
+        <view style="font-size:13px;font-weight:600">已登记</view>
+        <view style="font-size:11px;color:var(--g3);margin-top:2px">{{detail.createdAtDisplay}}</view>
+      </view>
+    </view>
+    <view class="tli">
+      <view class="tld {{detail.status === 'PENDING' ? 'off' : ''}}">
+        <view wx:if="{{detail.status !== 'PENDING'}}" class="icon-chk"></view>
+      </view>
+      <view style="flex:1;padding-top:3px">
+        <view style="font-size:13px;font-weight:600">物业处理</view>
+        <view style="font-size:11px;color:var(--g5);margin-top:1px">{{detail.status === 'PENDING' ? '处理中' : '已跟进'}}</view>
+      </view>
+    </view>
+    <view class="tli">
+      <view class="tld {{detail.status === 'HANDLED' ? '' : 'off'}}">
+        <view wx:if="{{detail.status === 'HANDLED'}}" class="icon-chk"></view>
+      </view>
+      <view style="flex:1;padding-top:3px">
+        <view style="font-size:13px;color:var(--g3)">处理完成</view>
+      </view>
+    </view>
+  </view>
+</view>

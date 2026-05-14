@@ -1,0 +1,43 @@
+<view class="page-sub">
+  <view class="card" style="margin:12px 20px;background:linear-gradient(135deg,#1A1A1A,#2C2C2C);color:#fff">
+    <view style="font-size:10px;color:rgba(255,255,255,.45);letter-spacing:2px">待缴总额</view>
+    <view style="font-size:32px;font-weight:700;color:var(--gold);margin:6px 0 2px;letter-spacing:1px">¥{{summaryAmount}}</view>
+    <view style="font-size:10px;color:rgba(255,255,255,.3)">含当月账单及历史欠费</view>
+  </view>
+  <view class="sec fb" style="align-items:center">
+    <text>待缴账单</text>
+    <view class="bill-select-all" wx:if="{{pendingBillCount > 0}}" catchtap="toggleSelectAll">
+      <view class="bck {{selectAllChecked ? 'on' : ''}}"><view class="icon-chk"></view></view>
+      <text class="bill-select-all-text">全选</text>
+    </view>
+  </view>
+  <view class="card">
+    <!-- 勿用 data-idx：index 为 0 时 dataset.idx 在部分基础库为 undefined，导致第一条无法勾选 -->
+    <view class="bill" wx:for="{{bills}}" wx:key="id" bindtap="toggleCheck" data-id="{{item.id}}">
+      <view class="bck {{item.checked ? 'on' : ''}}"><view class="icon-chk"></view></view>
+      <view style="flex:1">
+        <view style="font-size:14px;font-weight:500">{{item.month}}</view>
+        <view style="font-size:11px;color:{{item.subClass || 'var(--g5)'}}">{{item.sub}}</view>
+      </view>
+      <view style="text-align:right">
+        <view style="font-size:16px;font-weight:600">¥{{item.amount}}</view>
+        <view style="font-size:11px;color:var(--g5)">{{item.statusText}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="card bill-history-entry" bindtap="goPaidHistory">
+    <view class="fb" style="align-items:center;padding:2px 0">
+      <text style="font-size:14px;font-weight:500;color:var(--bk)">历史已缴账单</text>
+      <text style="font-size:13px;color:var(--gold)">查看 ›</text>
+    </view>
+    <view style="font-size:11px;color:var(--g5);margin-top:4px">查看以往已完成的物业缴费记录</view>
+  </view>
+  <view style="padding:0 20px;margin-top:8px">
+    <view class="fb" style="margin-bottom:10px">
+      <text style="font-size:12px;color:var(--g5)">已选 {{totalCount}} 笔</text>
+      <text style="font-size:20px;font-weight:700;color:var(--gold)">¥{{totalAmount}}</text>
+    </view>
+    <button class="btn bk-btn" bindtap="submit">立即缴费 · 微信支付</button>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

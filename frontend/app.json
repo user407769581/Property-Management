@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/rental/index",
+    "pages/order/index",
+    "pages/my/index",
+    "pages/message/index",
+    "pages/announce/index",
+    "pages/announce/detail",
+    "pages/bind/index",
+    "pages/repair/index",
+    "pages/bill/index",
+    "pages/bill/history",
+    "pages/housekeeping/index",
+    "pages/housekeeping/time",
+    "pages/housekeeping/confirm",
+    "pages/housekeeping/detail",
+    "pages/lost/index",
+    "pages/lost/detail",
+    "pages/feedback/index",
+    "pages/feedback/detail",
+    "pages/order/detail",
+    "pages/rental/publish",
+    "pages/rental/manage",
+    "pages/rental/detail",
+    "pages/cs/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "臻享家",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#888888",
+    "selectedColor": "#C5A572",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/rental/index",
+        "text": "租房"
+      },
+      {
+        "pagePath": "pages/order/index",
+        "text": "工单"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的"
+      }
+    ]
+  }
+}

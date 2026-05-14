@@ -1,0 +1,11 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view style="font-size:15px;font-weight:600;margin-bottom:12px">选择服务套餐</view>
+    <view class="pkg {{item.sel ? 'sel' : ''}}" wx:for="{{packages}}" wx:key="id" bindtap="selectPkg" data-idx="{{index}}">
+      <view style="font-size:15px;font-weight:600;margin-bottom:3px">{{item.name}}</view>
+      <view style="font-size:20px;font-weight:700;color:var(--gold)">¥{{item.price}} <text style="font-size:12px;font-weight:400;color:var(--g5)">/ {{item.dur}}</text></view>
+      <view style="font-size:12px;color:var(--g5);margin-top:4px">{{item.desc}}</view>
+    </view>
+    <button class="btn bp" bindtap="goNext" style="margin-top:6px">下一步 · 选择时间</button>
+  </view>
+</view>

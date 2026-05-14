@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+dist-ssr/
+**/.vite/
+**/.tmp/
+*.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+certs/
+**/certs/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Local mini-program artifacts
+miniprogram_npm/
+**/miniprogram_npm/
+project.private.config.json
+**/project.private.config.json
+
+# Local database dumps may contain personal data
+*.sql

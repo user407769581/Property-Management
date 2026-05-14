@@ -1,0 +1,12 @@
+<view class="page-sub">
+  <view style="background:#fff">
+    <view wx:for="{{messages}}" wx:key="index" data-idx="{{index}}" bindtap="markRead" style="padding:12px 20px;border-bottom:1px solid var(--g1);position:relative;cursor:pointer">
+      <view wx:if="{{item.unread}}" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:6px;height:6px;background:var(--red);border-radius:50%"></view>
+      <view style="padding-left:{{item.unread ? '8px' : '0'}}">
+        <view style="font-size:10px;color:var(--g3)">{{item.time}}</view>
+        <view style="font-size:13px;margin-top:2px">{{item.text}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

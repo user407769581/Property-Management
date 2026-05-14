@@ -1,0 +1,39 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view style="font-size:10px;color:var(--gold);font-weight:500;letter-spacing:1px;margin-bottom:8px">{{announcement.createdAt}} · 物业通知</view>
+    <view style="font-size:18px;font-weight:600;line-height:1.5;margin-bottom:16px">{{announcement.title}}</view>
+    <view style="font-size:14px;color:var(--g7);line-height:2;white-space:pre-wrap">{{announcement.contentText}}</view>
+
+    <view wx:if="{{voteTopicId}}" style="margin-top:24px;border-top:1px solid var(--g1);padding-top:20px">
+      <view class="fb" style="margin-bottom:12px">
+        <view style="font-size:15px;font-weight:600">{{announcement.voteTopic.title}}</view>
+        <text class="badge bi">{{voteTopicStatusText}}</text>
+      </view>
+      <view style="font-size:12px;color:var(--g5);margin-bottom:16px;line-height:1.6">{{announcement.voteTopic.description}}</view>
+
+      <block wx:if="{{!voted}}">
+        <view class="vote-opt {{voteSelected === index ? 'sel' : ''}}" wx:for="{{options}}" wx:key="id" bindtap="selVote" data-id="{{index}}">
+          <view class="vote-ck"></view>
+          <view style="flex:1">
+            <view style="font-size:14px;font-weight:500">{{item.title}}</view>
+            <view style="font-size:11px;color:var(--g5);margin-top:2px">{{item.sub}}</view>
+          </view>
+        </view>
+        <button class="btn bp" style="margin-top:16px" bindtap="submitVote">提交投票</button>
+      </block>
+
+      <block wx:else>
+        <view style="margin-top:10px">
+          <view style="margin-bottom:12px" wx:for="{{options}}" wx:key="id">
+            <view class="fb" style="font-size:12px;margin-bottom:4px">
+              <text style="font-weight:600; {{voteSelected === index ? 'color:var(--gold)' : ''}}">{{item.title}} {{voteSelected === index ? '(您的选择)' : ''}}</text>
+              <text>{{item.votes}}票 ({{item.pct}}%)</text>
+            </view>
+            <view style="height:6px;background:var(--g1);border-radius:3px;overflow:hidden"><view style="height:100%;width:{{item.pct}}%;background:var(--gold)"></view></view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

@@ -1,0 +1,35 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view class="fb" style="margin-bottom:14px">
+      <view><view style="font-size:11px;color:var(--g5)">工单号</view><view style="font-size:16px;font-weight:600;margin-top:2px">{{detail.orderNo}}</view></view>
+      <text class="badge {{detail.status === 'WAIT_ASSIGN' || detail.status === 'IN_SERVICE' ? 'bi' : detail.status === 'CANCELLED' ? 'bc' : 'bd'}}">{{detail.statusText}}</text>
+    </view>
+    <view class="card" style="margin:0 0 10px">
+      <view style="font-size:12px;color:var(--g7);line-height:2.2">
+        <view class="fb"><text style="color:var(--g5)">套餐名称</text><text>{{detail.packageName || '—'}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">地址</text><text>{{detail.serviceAddress}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">服务时间</text><text>{{detail.serviceDate}} {{detail.serviceTime}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">参考金额</text><text style="color:var(--gold);font-weight:600">¥{{detail.amount}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">预约电话</text><text>{{detail.contactPhone}}</text></view>
+        <view wx:if="{{detail.clientNote}}" class="fb" style="align-items:flex-start"><text style="color:var(--g5);flex-shrink:0">特殊要求</text><text style="flex:1">{{detail.clientNote}}</text></view>
+      </view>
+    </view>
+    <view class="card" style="margin:0 0 10px" wx:if="{{detail.housekeeperId}}">
+      <view style="font-size:13px;font-weight:600;margin-bottom:6px">服务人员</view>
+      <block wx:if="{{detail.housekeeperName}}">
+        <view style="font-size:15px;font-weight:600;color:var(--bk)">{{detail.housekeeperName}}</view>
+        <view wx:if="{{detail.housekeeperPhone}}" style="font-size:13px;color:var(--gold);margin-top:10px;font-weight:500" bindtap="callStaff">联系电话 {{detail.housekeeperPhone}} ›</view>
+        <view wx:else style="font-size:11px;color:var(--g5);margin-top:8px">暂未登记服务人员电话，请咨询物业前台</view>
+      </block>
+      <view wx:else style="font-size:12px;color:var(--g7);line-height:1.6">已派单，服务人员档案同步中，请稍后再试或联系物业前台。</view>
+    </view>
+    <view class="card" style="margin:0 0 10px" wx:elif="{{detail.status === 'WAIT_ASSIGN'}}">
+      <view style="font-size:12px;color:var(--g5);line-height:1.6">服务人员尚未分配，请保持预约电话畅通，工作人员将与您联系。</view>
+    </view>
+    <view class="card" style="margin:0">
+      <view style="font-size:13px;font-weight:600;margin-bottom:4px">服务说明</view>
+      <view style="font-size:12px;color:var(--g7);line-height:1.8">{{detail.completeNote || '订单已提交，等待处理。'}}</view>
+    </view>
+    <button wx:if="{{detail.canPay}}" class="btn bk-btn" style="margin-top:14px" bindtap="payOrder">立即支付 · 微信支付</button>
+  </view>
+</view>

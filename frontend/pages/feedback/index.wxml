@@ -1,0 +1,16 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view class="fg"><label class="fl">反馈内容</label><textarea class="fi fi-textarea" value="{{content}}" bindinput="inputContent" placeholder="请描述您的建议或意见..."></textarea></view>
+    <button class="btn bp" bindtap="submit">提交反馈</button>
+    <view class="sec" style="margin-left:0;margin-top:24px">历史反馈</view>
+    <view wx:for="{{records}}" wx:key="id" style="padding:12px;background:#fff;border-radius:var(--Rs);margin-bottom:8px;box-shadow:var(--sh)">
+      <view style="font-size:11px;color:var(--g5);margin-bottom:4px">{{item.statusLabel}}</view>
+      <view style="font-size:13px;font-weight:500;margin-bottom:6px">{{item.content}}</view>
+      <view wx:if="{{item.reply}}" style="font-size:12px;color:var(--g5);padding:8px 10px;background:var(--g0);border-radius:6px;border-left:3px solid var(--gold)">
+        <view style="font-size:10px;color:var(--gold);margin-bottom:2px">物业回复</view>
+        {{item.reply}}
+      </view>
+    </view>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

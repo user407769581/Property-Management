@@ -1,0 +1,5 @@
+.vote-opt{display:flex;align-items:center;padding:12px 14px;border:1.5px solid var(--g2);border-radius:var(--Rs);margin-bottom:10px;cursor:pointer;transition:.2s}
+.vote-opt.sel{border-color:var(--gold);background:rgba(197,165,114,.03)}
+.vote-ck{width:18px;height:18px;border:1.5px solid var(--g3);border-radius:50%;margin-right:12px;position:relative;flex-shrink:0;transition:.2s}
+.vote-opt.sel .vote-ck{border-color:var(--gold);background:var(--gold)}
+.vote-opt.sel .vote-ck::after{content:'';position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}

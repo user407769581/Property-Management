@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "物业缴费",
+  "usingComponents": {
+    "login-popup": "/components/login-popup/index"
+  }
+}

@@ -1,0 +1,3 @@
+.pkg{background:#fff;border:1.5px solid var(--g2);border-radius:var(--R);padding:16px;margin-bottom:10px;cursor:pointer;transition:.2s}
+.pkg.sel{border-color:var(--gold);background:rgba(197,165,114,.03)}
+.pkg:active{transform:scale(.99)}

@@ -1,0 +1,45 @@
+<view class="page-sub" wx:if="{{detail}}">
+  <view style="padding:20px">
+    <view class="fb" style="margin-bottom:16px">
+      <view>
+        <view style="font-size:11px;color:var(--g5);letter-spacing:.5px">工单号</view>
+        <view style="font-size:16px;font-weight:600;margin-top:2px">{{detail.orderNo}}</view>
+      </view>
+      <text class="badge {{detail.status === 'HANDLED' ? 'bd' : 'bc'}}">{{detail.statusText}}</text>
+    </view>
+    <view class="card" style="margin:0 0 10px">
+      <view style="font-size:13px;font-weight:600;margin-bottom:8px">反馈内容</view>
+      <view style="font-size:14px;color:var(--bk);line-height:1.8;white-space:pre-wrap">{{detail.content}}</view>
+      <view style="margin-top:12px;font-size:11px;color:var(--g5)">提交时间 {{detail.createdAtDisplay}}</view>
+    </view>
+    <view class="card" style="margin:0 0 10px" wx:if="{{detail.hasReply}}">
+      <view style="font-size:13px;font-weight:600;margin-bottom:8px">物业回复</view>
+      <view style="font-size:13px;color:var(--g7);line-height:1.8;white-space:pre-wrap">{{detail.reply}}</view>
+    </view>
+    <view style="font-size:13px;font-weight:600;margin:16px 0 10px">处理进度</view>
+    <view class="tli">
+      <view class="tld"><view class="icon-chk"></view></view>
+      <view style="flex:1;padding-top:3px">
+        <view style="font-size:13px;font-weight:600">已提交反馈</view>
+        <view style="font-size:11px;color:var(--g3);margin-top:2px">{{detail.createdAtDisplay}}</view>
+      </view>
+    </view>
+    <view class="tli">
+      <view class="tld {{detail.status === 'PENDING' ? 'off' : ''}}">
+        <view wx:if="{{detail.status !== 'PENDING'}}" class="icon-chk"></view>
+      </view>
+      <view style="flex:1;padding-top:3px">
+        <view style="font-size:13px;font-weight:600">物业处理</view>
+        <view style="font-size:11px;color:var(--g5);margin-top:1px">{{detail.status === 'PENDING' ? '等待处理' : '已处理'}}</view>
+      </view>
+    </view>
+    <view class="tli">
+      <view class="tld {{detail.status === 'HANDLED' ? '' : 'off'}}">
+        <view wx:if="{{detail.status === 'HANDLED'}}" class="icon-chk"></view>
+      </view>
+      <view style="flex:1;padding-top:3px">
+        <view style="font-size:13px;color:var(--g3)">处理完成</view>
+      </view>
+    </view>
+  </view>
+</view>

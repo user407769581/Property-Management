@@ -1,0 +1,23 @@
+<view class="page-container">
+  <scroll-view scroll-x class="fbar">
+    <view class="ft {{activeFilter === index ? 'on' : ''}}" wx:for="{{filters}}" wx:key="*this" hover-class="" bindtap="switchFilter" data-index="{{index}}">{{item}}</view>
+  </scroll-view>
+
+  <view style="padding:0 20px; margin-top:8px;">
+    <view class="sc" wx:for="{{displayOrders}}" wx:key="rowKey" bindtap="goDetail" data-link="{{item.link}}">
+      <view class="sca" style="background:{{item.bg}}">
+        <view class="{{item.icon}}" style="background-color:{{item.color}}"></view>
+      </view>
+      <view class="sci">
+        <view class="sct">{{item.title}}</view>
+        <view class="scm">{{item.sub}}</view>
+      </view>
+      <view class="scr">
+        <text class="badge {{item.statusClass}}">{{item.status}}</text>
+        <view class="scti">{{item.date}}</view>
+      </view>
+    </view>
+    <view wx:if="{{displayOrders.length === 0}}" style="padding:24px 0;text-align:center;color:var(--g5)">暂无工单记录</view>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" lift-for-tab-bar="{{true}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

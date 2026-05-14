@@ -1,0 +1,21 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view class="fg"><label class="fl">上门地址</label><input class="fi" value="{{address}}" bindinput="inputAddress" placeholder="请填写详细地址，如：3号楼1802、厨房漏水位置等" /></view>
+    <view class="fg"><label class="fl">问题描述</label><textarea class="fi fi-textarea" bindinput="inputDescription" placeholder="请详细描述问题，最多500字"></textarea></view>
+    <view class="fg">
+      <label class="fl">上传照片（最多3张，可选）</label>
+      <view class="mp-photo-grid">
+        <view class="mp-photo-cell" wx:for="{{photoPaths}}" wx:for-index="idx" wx:key="*this">
+          <image class="mp-photo-img" src="{{item}}" mode="aspectFill" />
+          <view class="mp-photo-del" data-i="{{idx}}" catchtap="removePhoto">×</view>
+        </view>
+        <view class="phadd" wx:if="{{photoPaths.length < 3}}" bindtap="addPhoto">
+          <view class="icon-add"></view>
+          <text>添加</text>
+        </view>
+      </view>
+    </view>
+    <button class="btn bp" bindtap="submit">提交报修</button>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

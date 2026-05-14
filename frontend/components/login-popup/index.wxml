@@ -1,0 +1,27 @@
+<view class="lp-mask {{liftForTabBar ? 'lp-mask--tab' : ''}}" wx:if="{{show}}" bindtap="onMaskTap" catchtouchmove="noop">
+  <view class="lp-sheet {{show ? 'lp-in' : ''}}" catchtap="noop">
+    <!-- close button -->
+    <view class="lp-close" bindtap="onClose">
+      <view class="lp-close-icon"></view>
+    </view>
+
+    <!-- branding -->
+    <view class="lp-brand">
+      <view class="lp-logo"><text class="lp-logo-text">臻</text></view>
+      <view class="lp-title">欢迎使用臻享家</view>
+      <view class="lp-sub">登录后享受更多物业服务</view>
+    </view>
+
+    <!-- phone login button -->
+    <button class="lp-btn lp-btn-primary" open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber">
+      <view class="lp-btn-icon"></view>
+      <text>手机号快捷登录</text>
+    </button>
+
+    <!-- skip -->
+    <view class="lp-skip" bindtap="onClose">暂不登录</view>
+
+    <!-- privacy -->
+    <view class="lp-privacy">登录即代表同意<text class="lp-link">《用户协议》</text>和<text class="lp-link">《隐私政策》</text></view>
+  </view>
+</view>

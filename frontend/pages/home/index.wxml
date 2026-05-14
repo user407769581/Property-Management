@@ -1,0 +1,63 @@
+<view class="page-container">
+  <view style="display: flex; justify-content: flex-end; padding: 10px 20px;">
+    <view style="position:relative; cursor:pointer;" bindtap="navTo" data-id="pMsg">
+      <view class="bell-icon"></view>
+      <view wx:if="{{unreadCount > 0}}" class="notif"></view>
+    </view>
+  </view>
+
+  <!-- Banner -->
+  <swiper wx:if="{{banners.length}}" style="margin:12px 20px;border-radius:16px;overflow:hidden;height:180px" indicator-dots autoplay interval="4000" duration="500" circular>
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <view style="position:relative;height:180px;cursor:pointer" bindtap="navTo" data-id="pAnnd" data-announcement-id="{{item.id}}">
+        <image src="{{item.coverImage}}" mode="aspectFill" style="width:100%;height:100%" />
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <!-- Quick Menu -->
+  <view class="card" style="margin-top:4px;padding:12px 14px">
+    <view class="srv-grid">
+      <view class="srv-card" wx:for="{{mockServices}}" wx:key="id" style="background:{{item.bg}}" bindtap="navTo" data-id="{{item.id}}">
+        <view class="srv-info"><view class="srv-t">{{item.name}}</view><view class="srv-sub">{{item.sub}}</view></view>
+        <!-- 图标：与 index.html 一致，mask 写在 WXSS（小程序内联 style 动态 url 常不生效） -->
+        <view class="srv-ic srv-ic--{{item.iconKey}}" style="background-color: {{item.color}};"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Recent Orders -->
+  <view class="sec fb"><text>近期工单</text><text style="font-size:12px;color:var(--gold);cursor:pointer" bindtap="navTo" data-id="pW">全部 ›</text></view>
+  <view style="padding:0 20px">
+    <block wx:if="{{!loggedIn}}">
+      <view style="padding:24px 0;color:var(--g5);text-align:center;font-size:13px">登录后查看近期工单</view>
+    </block>
+    <block wx:elif="{{!bound}}">
+      <view style="padding:24px 0;color:var(--g5);text-align:center;font-size:13px">绑定房屋后查看工单记录</view>
+    </block>
+    <block wx:elif="{{recentOrders.length === 0}}">
+      <view style="padding:20px 0;color:var(--g5);text-align:center">暂无工单记录</view>
+    </block>
+    <block wx:else>
+      <view class="sc" wx:for="{{recentOrders}}" wx:key="id" bindtap="navTo" data-id="{{item.icon === 'icon-repair' ? 'pOd' : 'pHkd'}}" data-link="{{item.link}}">
+        <view class="sca" style="background:{{item.bg}}">
+          <view class="{{item.icon}}"></view>
+        </view>
+        <view class="sci"><view class="sct">{{item.title}}</view><view class="scm">{{item.sub}}</view></view>
+        <view class="scr"><text class="badge {{item.statusClass}}">{{item.status}}</text><view class="scti">{{item.date}}</view></view>
+      </view>
+    </block>
+  </view>
+
+  <!-- Announcements -->
+  <view class="sec fb"><text>社区公告</text><text style="font-size:12px;color:var(--gold);cursor:pointer" bindtap="navTo" data-id="pAnn">全部 ›</text></view>
+  <view class="card" style="padding:12px 16px">
+    <view wx:for="{{announcements}}" wx:key="id" style="cursor:pointer" bindtap="navTo" data-id="pAnnd" data-announcement-id="{{item.id}}">
+      <view style="font-size:10px;color:var(--gold);font-weight:500;letter-spacing:.5px">{{item.date}}</view>
+      <view style="font-size:13px;font-weight:600;margin-top:2px">{{item.title}}</view>
+      <view wx:if="{{index !== announcements.length - 1}}" class="dv"></view>
+    </view>
+  </view>
+</view>
+
+<login-popup show="{{showLoginPopup}}" lift-for-tab-bar="{{true}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

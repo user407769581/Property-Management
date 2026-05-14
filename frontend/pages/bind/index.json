@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "房屋管理",
+  "usingComponents": {
+    "login-popup": "/components/login-popup/index"
+  }
+}

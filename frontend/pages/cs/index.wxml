@@ -1,0 +1,14 @@
+<view class="page-sub">
+  <view style="padding:40px 20px;text-align:center">
+    <view style="width:72px;height:72px;border-radius:50%;background:rgba(197,165,114,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+      <view class="icon-cs"></view>
+    </view>
+    <view style="font-size:19px;font-weight:600">物业客服中心</view>
+    <view style="font-size:12px;color:var(--g5);margin-top:3px">{{service.description || '龙江太古城物业管理处'}}</view>
+    <view style="margin-top:28px">
+      <view style="font-size:28px;font-weight:700;color:var(--gold);letter-spacing:2px">{{service.phone || '暂无电话'}}</view>
+      <view style="font-size:12px;color:var(--g5);margin-top:6px">服务时间：{{service.serviceHours || '待配置'}}</view>
+    </view>
+    <button class="btn bp" style="margin-top:28px" bindtap="call">立即拨打</button>
+  </view>
+</view>

@@ -1,0 +1,275 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String
+  role         String
+  name         String
+  status       String   @default("ACTIVE")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model WechatUser {
+  id          String   @id @default(cuid())
+  openid      String   @unique
+  nickname    String
+  phone       String?
+  boundHouseId String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Building {
+  id        String   @id @default(cuid())
+  name      String
+  code      String   @unique
+  status    String   @default("ACTIVE")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  houses    House[]
+}
+
+model House {
+  id          String    @id @default(cuid())
+  buildingId  String
+  roomNo      String
+  area        Float?
+  ownerTypeId String?
+  status      String    @default("IDLE")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  building    Building  @relation(fields: [buildingId], references: [id])
+  ownerType   OwnerType? @relation(fields: [ownerTypeId], references: [id])
+  bills       PropertyBill[]
+}
+
+model OwnerType {
+  id          String   @id @default(cuid())
+  name        String
+  feeRate     Float
+  baseFee     Float
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  houses      House[]
+}
+
+model BindingApplication {
+  id            String   @id @default(cuid())
+  buildingId    String
+  roomNo        String
+  applicantName String
+  applicantUserId String
+  phone         String
+  status        String   @default("PENDING")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Maintainer {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  type      String
+  status    String   @default("ACTIVE")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RepairOrder {
+  id            String   @id @default(cuid())
+  orderNo       String   @unique
+  ownerId       String
+  address       String
+  description   String
+  imagesJson    String?  @db.LongText
+  phone         String
+  status        String
+  maintainerId  String?
+  completeNote  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Housekeeper {
+  id         String   @id @default(cuid())
+  name       String
+  phone      String
+  specialty  String
+  status     String   @default("ACTIVE")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model HousekeepingPackage {
+  id            String   @id @default(cuid())
+  name          String
+  price         Float
+  durationHours Int
+  description   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model HousekeepingOrder {
+  id             String   @id @default(cuid())
+  orderNo        String   @unique
+  ownerId        String
+  packageId      String
+  contactPhone   String
+  serviceAddress String
+  serviceDate    String
+  serviceTime    String
+  amount         Float
+  /// PENDING=待在线支付(旧) PAID=已在线支付 OFFLINE=仅预约前台结算
+  paymentStatus  String
+  status         String
+  housekeeperId  String?
+  completeNote   String?
+  /// 客户预约时填写的特殊要求
+  clientNote     String?  @db.VarChar(500)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model PropertyBill {
+  id        String   @id @default(cuid())
+  month     String
+  title     String
+  amount    Float
+  status    String
+  houseId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  house     House    @relation(fields: [houseId], references: [id])
+}
+
+model Announcement {
+  id         String   @id @default(cuid())
+  title      String
+  coverImage String?
+  content    String   @db.LongText
+  status     String
+  sort       Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model VoteTopic {
+  id             String   @id @default(cuid())
+  announcementId String?
+  title          String
+  description    String?
+  optionsJson    String   @db.LongText
+  status         String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model RentalListing {
+  id         String   @id @default(cuid())
+  ownerId    String
+  title      String
+  coverImage String?
+  /// 多图 URL 的 JSON 数组字符串，如 ["url1","url2"]；可与 coverImage（首张）一致
+  imagesJson String?  @db.LongText
+  address    String
+  rent       Float
+  area       Float
+  layout     String
+  phone      String
+  status     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model FeedbackRecord {
+  id        String   @id @default(cuid())
+  /// 与报修 R、家政 H 一致：F + 毫秒时间戳
+  orderNo   String?  @unique
+  ownerId   String
+  content   String   @db.LongText
+  status    String
+  reply     String?  @db.LongText
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LostFoundRecord {
+  id        String   @id @default(cuid())
+  /// 与报修 R、家政 H 一致：L + 毫秒时间戳
+  orderNo   String?  @unique
+  ownerId   String
+  itemName  String
+  lostAt    String
+  location  String
+  phone     String
+  status    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CustomerServiceSetting {
+  id           String   @id @default(cuid())
+  phone        String
+  serviceHours String
+  description  String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SystemSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  label     String
+  value     String   @db.LongText
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OperationLog {
+  id        String   @id @default(cuid())
+  module    String
+  action    String
+  operator  String
+  detail    String   @db.LongText
+  createdAt DateTime @default(now())
+}
+
+model MpNotification {
+  id        String   @id @default(cuid())
+  userId    String?
+  title     String
+  content   String   @db.LongText
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PaymentOrder {
+  id            String    @id @default(cuid())
+  orderNo       String    @unique
+  businessType  String
+  businessId    String?
+  billIdsJson   String?   @db.LongText
+  openid        String?
+  mchId         String?
+  prepayId      String?
+  paidAmount    Float
+  channel       String    @default("wechat_pay")
+  status        String    @default("PENDING")
+  tradeState    String?
+  transactionNo String?
+  notifyRawJson String?   @db.LongText
+  paidAt        DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}

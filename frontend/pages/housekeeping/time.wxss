@@ -1,0 +1,57 @@
+.hk-sec-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.hk-sec-title--2 {
+  margin-top: 22px;
+}
+.hk-date-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+.hk-date-row {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 4px 2px 12px;
+}
+.hk-date-pill {
+  flex-shrink: 0;
+  min-width: 100px;
+  padding: 12px 14px;
+  border-radius: var(--Rs);
+  border: 1px solid var(--g2);
+  background: #fff;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.hk-date-pill.today {
+  border-color: rgba(196, 136, 92, 0.45);
+}
+.hk-date-pill.sel {
+  border-color: var(--gold);
+  background: rgba(196, 136, 92, 0.12);
+}
+.hk-date-line1 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--g7);
+}
+.hk-date-line2 {
+  font-size: 11px;
+  color: var(--g5);
+  margin-top: 4px;
+}
+.hk-time-hint {
+  font-size: 12px;
+  color: var(--g5);
+  padding: 8px 0 4px;
+  line-height: 1.5;
+}
+.time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 4px; }
+.tm { padding: 11px 6px; text-align: center; border: 1px solid var(--g2); border-radius: var(--Rs); font-size: 13px; font-weight: 500; }
+.tm.dis { color: var(--g3); background: var(--g0); }
+.tm.sel { background: var(--gold); color: #fff; border-color: var(--gold); font-weight: 600; }

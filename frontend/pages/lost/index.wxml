@@ -1,0 +1,16 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view class="fg"><label class="fl">丢失时间</label><input class="fi" value="{{form.lostAt}}" data-key="lostAt" bindinput="inputField" placeholder="日期或文字均可，如 2025-03-20、昨天下午" maxlength="80" /></view>
+    <view class="fg"><label class="fl">物品描述</label><textarea class="fi fi-textarea" data-key="itemName" bindinput="inputField" placeholder="详细描述物品特征，如颜色、品牌、大小等" style="min-height:60px"></textarea></view>
+    <view class="fg"><label class="fl">丢失地点</label><input class="fi" data-key="location" bindinput="inputField" placeholder="如：小区门口、3号楼电梯、地下停车场" /></view>
+    <view class="fg"><label class="fl">联系方式</label><input class="fi" value="{{form.phone}}" data-key="phone" bindinput="inputField" /></view>
+    <button class="btn bp" bindtap="submit">提交</button>
+    <view class="sec" style="margin-left:0;margin-top:24px">我的记录</view>
+    <view class="card" wx:for="{{records}}" wx:key="id" style="margin:0 0 8px">
+      <view class="fb" style="margin-bottom:4px"><text class="badge bi">{{item.statusLabel}}</text><text style="font-size:10px;color:var(--g3)">{{item.lostAt}}</text></view>
+      <view style="font-size:13px;font-weight:600">{{item.itemName}}</view>
+      <view style="font-size:11px;color:var(--g5);margin-top:2px">{{item.location}}</view>
+    </view>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

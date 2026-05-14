@@ -1,0 +1,23 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view class="card" style="margin:0 0 14px;border-left:3px solid var(--gold)">
+      <view style="font-size:12px;color:var(--g7);line-height:2.4">
+        <view class="fb"><text style="color:var(--g5)">套餐</text><text style="font-weight:500">{{selection.packageName}}（{{selection.durationText}}）</text></view>
+        <view class="fb"><text style="color:var(--g5)">日期</text><text>{{selection.serviceDate}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">时间</text><text>{{selection.serviceTime}}</text></view>
+      </view>
+    </view>
+    <view class="fg"><label class="fl">服务地址</label><input class="fi" value="{{serviceAddress}}" bindinput="inputAddress" placeholder="请输入服务地址" /></view>
+    <view class="fg"><label class="fl">联系电话</label><input class="fi" value="{{contactPhone}}" bindinput="inputPhone" type="number" placeholder="请输入联系电话" /></view>
+    <view class="fg"><label class="fl">特殊要求（选填）</label><textarea class="fi fi-textarea" bindinput="inputNote" placeholder="如有特殊需求请说明" style="min-height:60px"></textarea></view>
+    <view style="background:var(--g0);border-radius:var(--R);padding:16px;margin-bottom:16px">
+      <view class="fb" style="align-items:baseline">
+        <text style="font-size:13px;color:var(--g5)">套餐参考价</text>
+        <text style="font-size:22px;font-weight:700;color:var(--gold)">¥{{selection.amount}}</text>
+      </view>
+      <view style="font-size:11px;color:var(--g5);margin-top:8px;line-height:1.6">仅为参考，实际费用与结算方式请与物业前台确认；提交后由工作人员与您联系。</view>
+    </view>
+    <button class="btn bp" bindtap="submit">提交预约</button>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

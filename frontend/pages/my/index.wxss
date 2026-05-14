@@ -1,0 +1,84 @@
+/* 登录后统一使用项目 Logo 作为头像 */
+.my-user-avatar-wrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--g2);
+}
+.my-user-avatar-img {
+  width: 50px;
+  height: 50px;
+  display: block;
+}
+
+/* 绑定申请：审核中 / 未通过（与列表区分，一眼可见） */
+.bind-audit {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px !important;
+  margin-top: 4px;
+}
+.bind-audit--pending {
+  background: rgba(197, 165, 114, 0.06) !important;
+  border: 1px solid rgba(197, 165, 114, 0.2) !important;
+}
+.bind-audit--reject {
+  background: rgba(196, 92, 92, 0.06) !important;
+  border: 1px solid rgba(196, 92, 92, 0.2) !important;
+}
+.bind-audit-tag {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--gold);
+  padding: 4px 8px;
+  border-radius: 6px;
+  line-height: 1.2;
+}
+.bind-audit-tag--warn {
+  background: var(--red);
+}
+.bind-audit-main {
+  flex: 1;
+  min-width: 0;
+}
+.bind-audit-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bk);
+  line-height: 1.35;
+}
+.bind-audit-line {
+  font-size: 13px;
+  color: var(--g7);
+  margin-top: 6px;
+}
+.bind-audit-hint {
+  font-size: 11px;
+  color: var(--g5);
+  margin-top: 6px;
+  line-height: 1.45;
+}
+.bind-audit-more {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: 500;
+  padding-top: 2px;
+}
+
+.am{display:flex;align-items:center;padding:14px 20px;background:#fff;border-bottom:1px solid var(--g1);cursor:pointer;transition:.15s}
+.am:active{background:var(--g0)}
+.am:last-child{border-bottom:none;}
+.amic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-right:11px;flex-shrink:0}
+.menu-icon { width:17px; height:17px; -webkit-mask-size: cover; }
+.amt{flex:1}.amn{font-size:14px;font-weight:500}.amd{font-size:11px;color:var(--g5);margin-top:1px}
+.arrow-right {
+  width: 15px; height: 15px; background-color: var(--g3);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' stroke='black' stroke-width='2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='9 6 15 12 9 18'/%3E%3C/svg%3E");
+  -webkit-mask-size: cover;
+}

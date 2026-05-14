@@ -1,0 +1,32 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view class="fg"><label class="fl">标题</label><input class="fi" value="{{form.title}}" data-key="title" bindinput="inputField" placeholder="如：3号楼 1802 出租" /></view>
+    <view class="fg"><label class="fl">房屋地址</label><input class="fi" value="{{form.address}}" data-key="address" bindinput="inputField" placeholder="请输入房屋地址" /></view>
+    <view style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <view class="fg"><label class="fl">月租金（元）</label><input class="fi" value="{{form.rent}}" data-key="rent" bindinput="inputField" type="number" placeholder="3500" /></view>
+      <view class="fg"><label class="fl">面积（㎡）</label><input class="fi" value="{{form.area}}" data-key="area" bindinput="inputField" type="number" placeholder="89" /></view>
+    </view>
+    <view class="fg">
+      <label class="fl">户型</label>
+      <picker bindchange="bindType" range="{{types}}" value="{{typeIdx}}">
+        <view class="fi fs">{{types[typeIdx]}}</view>
+      </picker>
+    </view>
+    <view class="fg"><label class="fl">联系电话</label><input class="fi" value="{{form.phone}}" data-key="phone" bindinput="inputField" /></view>
+    <view class="fg">
+      <label class="fl">上传照片（最多9张，首张为封面）</label>
+      <view class="mp-photo-grid">
+        <view class="mp-photo-cell" wx:for="{{photoPaths}}" wx:for-index="idx" wx:key="*this">
+          <image class="mp-photo-img" src="{{item}}" mode="aspectFill" />
+          <view class="mp-photo-del" data-i="{{idx}}" catchtap="removePhoto">×</view>
+        </view>
+        <view class="phadd" wx:if="{{photoPaths.length < 9}}" bindtap="addPhoto">
+          <view class="icon-add"></view>
+          <text>添加</text>
+        </view>
+      </view>
+    </view>
+    <button class="btn bp" bindtap="submit">发布</button>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

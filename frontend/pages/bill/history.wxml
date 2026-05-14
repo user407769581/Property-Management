@@ -1,0 +1,21 @@
+<view class="page-sub">
+  <view class="sec" style="margin-top:12px">缴费记录</view>
+  <view class="card" wx:if="{{records.length}}">
+    <view class="paid-row" wx:for="{{records}}" wx:key="id">
+      <view style="flex:1;min-width:0">
+        <view class="paid-month">{{item.month}}</view>
+        <view class="paid-title">{{item.title}}</view>
+        <view class="paid-time">缴费时间 {{item.paidAtText}}</view>
+      </view>
+      <view class="paid-amount-wrap">
+        <view class="paid-amount">¥{{item.amount}}</view>
+        <view class="paid-tag">已缴费</view>
+      </view>
+    </view>
+  </view>
+  <view class="card paid-empty" wx:else>
+    <view style="text-align:center;padding:28px 12px;color:var(--g5);font-size:13px">暂无已缴账单记录</view>
+    <view style="text-align:center;font-size:12px;color:var(--g3)">完成缴费后，记录将显示在这里</view>
+  </view>
+</view>
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

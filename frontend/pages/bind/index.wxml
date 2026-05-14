@@ -1,0 +1,64 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view class="card" wx:if="{{currentBinding}}" style="margin:0 0 20px;background:rgba(82, 196, 26, 0.05);border:1px solid rgba(82, 196, 26, 0.2)">
+      <view class="fb" style="align-items:flex-start">
+        <view>
+          <view style="font-size:16px;font-weight:600;color:var(--bk);line-height:1.4">{{currentBinding.roomNo ? currentBinding.roomNo : '已绑定房屋'}}</view>
+          <view style="font-size:13px;color:var(--g7);margin-top:4px">{{currentBinding.applicantName}} · {{currentBinding.phone}}</view>
+        </view>
+        <text class="badge bd" style="background:var(--grn);color:#fff">已绑定</text>
+      </view>
+      <view wx:if="{{currentBinding.id}}" style="margin-top:16px;padding-top:12px;border-top:1px dashed rgba(82, 196, 26, 0.2);text-align:right;font-size:13px;color:var(--red);font-weight:500" bindtap="unbindCurrent">解绑房屋</view>
+    </view>
+    
+    <view class="card" wx:elif="{{latestApplication}}" style="margin:0 0 20px;background:rgba(197, 165, 114, 0.06);border:1px solid rgba(197, 165, 114, 0.2)">
+      <view class="fb" style="align-items:flex-start">
+        <view>
+          <view style="font-size:16px;font-weight:600;color:var(--bk);line-height:1.4">{{latestApplication.roomNo}}</view>
+          <view style="font-size:13px;color:var(--g7);margin-top:4px">{{latestApplication.applicantName}} · {{latestApplication.phone}}</view>
+          <view style="font-size:11px;color:var(--g5);margin-top:6px;line-height:1.45">{{latestApplicationStatusText}}</view>
+        </view>
+        <text class="badge bi" style="background:var(--gold);color:#fff;border:none">{{latestApplicationBadgeText}}</text>
+      </view>
+    </view>
+    <view class="dv" style="margin:18px 0"></view>
+    <view style="font-size:14px;font-weight:600;margin-bottom:12px">绑定新房屋</view>
+    <view class="fg">
+      <label class="fl">楼号</label>
+      <view class="fi fs" bindtap="openBuildingSheet">{{bIdx > -1 ? buildings[bIdx] : '请选择楼号'}}</view>
+    </view>
+    <view class="fg">
+      <label class="fl">户号</label>
+      <view class="fi fs" bindtap="openRoomSheet">{{rIdx > -1 ? rooms[rIdx] : '请选择户号'}}</view>
+    </view>
+    <view class="fg"><label class="fl">真实姓名</label><input class="fi" value="{{applicantName}}" bindinput="inputName" placeholder="请输入真实姓名" /></view>
+    <view class="fg">
+      <label class="fl">手机号码</label>
+      <view class="fi bind-login-phone">{{loginPhone ? loginPhone : '未获取到手机号，请使用「手机号快捷登录」后重试'}}</view>
+    </view>
+    <button class="btn bp" bindtap="submit">提交绑定申请</button>
+  </view>
+</view>
+
+<!-- 自定义选择器：避免原生 picker 深色底栏/黑边（无法通过 WXSS 覆盖） -->
+<view class="bind-sheet-mask" wx:if="{{sheetOpen}}" bindtap="cancelSheet" catchtouchmove="noop">
+  <view class="bind-sheet" catchtap="noop">
+    <view class="bind-sheet-title">{{sheetTitle}}</view>
+    <scroll-view scroll-y class="bind-sheet-scroll" show-scrollbar="{{false}}">
+      <view
+        wx:for="{{sheetList}}"
+        wx:for-index="idx"
+        wx:key="*this"
+        class="bind-sheet-row {{sheetSel === idx ? 'bind-sheet-row--on' : ''}}"
+        data-idx="{{idx}}"
+        bindtap="onSheetPick"
+      >{{item}}</view>
+    </scroll-view>
+    <view class="bind-sheet-actions">
+      <button class="btn bind-sheet-btn bind-sheet-btn-cancel" bindtap="cancelSheet">取消</button>
+      <button class="btn bp bind-sheet-btn" bindtap="confirmSheet">确定</button>
+    </view>
+  </view>
+</view>
+
+<login-popup show="{{showLoginPopup}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

@@ -1,0 +1,43 @@
+<view class="page-sub">
+  <view style="padding:20px">
+    <view class="fb" style="margin-bottom:16px">
+      <view><view style="font-size:11px;color:var(--g5);letter-spacing:.5px">工单号</view><view style="font-size:16px;font-weight:600;margin-top:2px">{{detail.orderNo}}</view></view>
+      <text class="badge {{detail.status === 'PROCESSING' ? 'bi' : detail.status === 'COMPLETED' ? 'bd' : 'bc'}}">{{detail.statusText}}</text>
+    </view>
+    <view class="card" style="margin:0 0 10px">
+      <view style="font-size:13px;font-weight:600;margin-bottom:8px">报修信息</view>
+      <view style="font-size:12px;color:var(--g7);line-height:2.2">
+        <view class="fb"><text style="color:var(--g5)">地址</text><text>{{detail.address}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">描述</text><text>{{detail.description}}</text></view>
+        <view class="fb"><text style="color:var(--g5)">提交时间</text><text>{{detail.createdAtDisplay}}</text></view>
+      </view>
+      <view wx:if="{{detail.imageUrls && detail.imageUrls.length}}" style="margin-top:12px">
+        <view style="font-size:11px;color:var(--g5);margin-bottom:8px">现场照片</view>
+        <view class="mp-photo-grid">
+          <view class="mp-photo-cell" wx:for="{{detail.imageUrls}}" wx:key="*this">
+            <image class="mp-photo-img" src="{{item}}" mode="aspectFill" show-menu-by-longpress="{{true}}" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="card" style="margin:0 0 10px" wx:if="{{detail.maintainerId}}">
+      <view style="font-size:13px;font-weight:600;margin-bottom:8px">维修人员</view>
+      <view style="font-size:12px;color:var(--g7)">已分配维修人员：{{detail.maintainerId}}</view>
+      <view style="margin-top:8px;font-size:11px;color:var(--g5);background:var(--g0);padding:8px 10px;border-radius:6px">如需联系，请拨打提交时预留手机号。</view>
+    </view>
+    
+    <view style="font-size:13px;font-weight:600;margin:16px 0 10px">处理进度</view>
+    <view class="tli">
+      <view class="tld"><view class="icon-chk"></view></view>
+      <view style="flex:1;padding-top:3px"><view style="font-size:13px;font-weight:600">已提交工单</view><view style="font-size:11px;color:var(--g3);margin-top:2px">{{detail.createdAtDisplay}}</view></view>
+    </view>
+    <view class="tli">
+      <view class="tld {{detail.status === 'PENDING' ? 'off' : ''}}"><view wx:if="{{detail.status !== 'PENDING'}}" class="icon-chk"></view></view>
+      <view style="flex:1;padding-top:3px"><view style="font-size:13px;font-weight:600">已安排维修</view><view style="font-size:11px;color:var(--g5);margin-top:1px">{{detail.maintainerId ? '已安排处理' : '等待派单'}}</view></view>
+    </view>
+    <view class="tli">
+      <view class="tld {{detail.status === 'COMPLETED' ? '' : 'off'}}"><view wx:if="{{detail.status === 'COMPLETED'}}" class="icon-chk"></view></view>
+      <view style="flex:1;padding-top:3px"><view style="font-size:13px;color:var(--g3)">维修完成 {{detail.completeNote || ''}}</view></view>
+    </view>
+  </view>
+</view>

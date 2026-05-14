@@ -1,0 +1,84 @@
+<view class="page-container">
+  <!-- Profile: logged in -->
+  <view class="card" style="margin-top:12px;display:flex;align-items:center;gap:12px" wx:if="{{loggedIn}}">
+    <view class="my-user-avatar-wrap">
+      <image class="my-user-avatar-img" src="/pages/logo.png" mode="aspectFill" />
+    </view>
+    <view style="flex:1"><view style="font-size:16px;font-weight:600">{{profile.nickname}}</view><view style="font-size:11px;color:var(--g5);margin-top:2px">{{profile.phone || '未填写手机号'}}</view></view>
+    <text class="badge {{profile.bound ? 'bd' : 'bc'}}">{{profile.boundText}}</text>
+  </view>
+
+  <!-- Profile: not logged in -->
+  <view class="card" style="margin-top:12px;display:flex;align-items:center;gap:12px" wx:else bindtap="showLogin">
+    <view style="width:50px;height:50px;border-radius:50%;background:var(--g2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <view style="width:22px;height:22px;background-color:var(--g5);-webkit-mask-image:url(\"data:image/svg+xml,%3Csvg viewBox='0 0 24 24' stroke='black' stroke-width='1.5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E\");-webkit-mask-size:cover"></view>
+    </view>
+    <view style="flex:1"><view style="font-size:16px;font-weight:600;color:var(--g5)">点击登录</view><view style="font-size:11px;color:var(--g3);margin-top:2px">登录后享受更多服务</view></view>
+    <view class="arrow-right"></view>
+  </view>
+
+  <!-- 绑定申请状态：未绑定时在「我的」直接可见，无需进房屋管理 -->
+  <view
+    class="card bind-audit bind-audit--pending"
+    wx:if="{{loggedIn && bindingBanner && bindingBanner.type === 'pending'}}"
+    bindtap="goToBind"
+  >
+    <view class="bind-audit-tag">审核中</view>
+    <view class="bind-audit-main">
+      <view class="bind-audit-title">{{bindingBanner.title}}</view>
+      <view class="bind-audit-line">{{bindingBanner.roomLabel}}</view>
+      <view class="bind-audit-hint">{{bindingBanner.hint}}</view>
+    </view>
+    <view class="bind-audit-more">详情 ›</view>
+  </view>
+  <view
+    class="card bind-audit bind-audit--reject"
+    wx:elif="{{loggedIn && bindingBanner && bindingBanner.type === 'rejected'}}"
+    bindtap="goToBind"
+  >
+    <view class="bind-audit-tag bind-audit-tag--warn">未通过</view>
+    <view class="bind-audit-main">
+      <view class="bind-audit-title">{{bindingBanner.title}}</view>
+      <view class="bind-audit-line" wx:if="{{bindingBanner.roomLabel}}">申请房屋：{{bindingBanner.roomLabel}}</view>
+      <view class="bind-audit-hint">{{bindingBanner.hint}}</view>
+    </view>
+    <view class="bind-audit-more">查看 ›</view>
+  </view>
+
+  <!-- Bind prompt: logged in but not bound，且无进行中的申请提示时 -->
+  <view class="card" style="display:flex;align-items:center;gap:10px;background:rgba(197,165,114,.06);border:1px solid rgba(197,165,114,.2)" wx:if="{{loggedIn && !profile.bound && !bindingBanner}}" bindtap="goToBind">
+    <view style="flex:1;font-size:13px;color:var(--g7)">绑定房屋后可使用全部功能</view>
+    <view style="font-size:13px;color:var(--gold);font-weight:500">去绑定 ›</view>
+  </view>
+
+  <!-- Menu Group 1 -->
+  <view class="card" style="padding:0;overflow:hidden">
+    <view class="am" wx:for="{{menuGroup1}}" wx:key="name" bindtap="navTo" data-item="{{item}}">
+      <view class="amic" style="background:{{item.bg}}">
+        <view class="menu-icon" style="background-color:{{item.color}}; -webkit-mask-image: url(\"{{item.iconPath}}\");"></view>
+      </view>
+      <view class="amt">
+        <view class="amn">{{item.name}}</view>
+        <view class="amd" wx:if="{{item.sub}}">{{item.sub}}</view>
+      </view>
+      <view class="ama"><view class="arrow-right"></view></view>
+    </view>
+  </view>
+
+  <!-- Menu Group 2 -->
+  <view class="card" style="padding:0;overflow:hidden">
+    <view class="am" wx:for="{{menuGroup2}}" wx:key="name" bindtap="navTo" data-item="{{item}}">
+      <view class="amic" style="background:{{item.bg}}">
+        <view class="menu-icon" style="background-color:{{item.color}}; -webkit-mask-image: url(\"{{item.iconPath}}\");"></view>
+      </view>
+      <view class="amt">
+        <view class="amn">{{item.name}}</view>
+        <view class="amd" wx:if="{{item.sub}}">{{item.sub}}</view>
+      </view>
+      <view class="ama"><view class="arrow-right"></view></view>
+    </view>
+  </view>
+  <view style="height:16px"></view>
+</view>
+
+<login-popup show="{{showLoginPopup}}" lift-for-tab-bar="{{true}}" bind:login="onLoginSuccess" bind:close="onLoginClose" />

@@ -1,0 +1,2 @@
+.ann{padding:12px 20px;border-bottom:1px solid var(--g1);cursor:pointer;transition:.1s}
+.ann:active{background:var(--g0)}

@@ -1,0 +1,153 @@
+.lp-mask {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  /* 系统底部安全区（无 tab 栏页面） */
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  /* 不压暗背后页面，仅保留透明层接收点击关闭 */
+  background: transparent;
+  /* 高于 custom-tab-bar 的 z-index:100；部分基础库下 tab 仍可能压层，配合 --tab 底部留白 */
+  z-index: 10000;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* 自定义 tabBar：height 62px + border-top 1px + content-box 下的安全区，与 custom-tab-bar/index.wxss 对齐 */
+.lp-mask.lp-mask--tab {
+  padding-bottom: calc(63px + constant(safe-area-inset-bottom));
+  padding-bottom: calc(63px + env(safe-area-inset-bottom));
+}
+
+.lp-sheet {
+  box-sizing: border-box;
+  width: 100%;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  /* 无遮罩时用阴影区分卡片与背后内容 */
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08), 0 -12px 48px rgba(0, 0, 0, 0.06);
+  /* 底部内边距（安全区由 .lp-mask 整体上移承担，避免重复叠加） */
+  padding: 0 40px 24px;
+  transform: translateY(100%);
+  transition: transform .3s cubic-bezier(.22,1,.36,1);
+  z-index: 9001;
+  position: relative;
+}
+.lp-sheet.lp-in {
+  transform: translateY(0);
+}
+
+.lp-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.lp-close-icon {
+  width: 20px;
+  height: 20px;
+  background-color: #888888;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' stroke='black' stroke-width='2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 6L6 18M6 6l12 12'/%3E%3C/svg%3E");
+  -webkit-mask-size: cover;
+}
+
+.lp-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0 24px;
+  flex-shrink: 0;
+}
+.lp-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C5A572, #D4BC8B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+.lp-logo-text {
+  font-size: 26px;
+  color: #fff;
+  font-weight: 700;
+}
+.lp-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1A1A1A;
+  letter-spacing: .5px;
+}
+.lp-sub {
+  font-size: 14px;
+  color: #888888;
+  margin-top: 6px;
+}
+
+.lp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  border-radius: 26px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 48px;
+}
+.lp-btn::after { display: none; }
+
+.lp-btn-primary {
+  background: #C5A572;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(197, 165, 114, 0.3);
+}
+.lp-btn-primary:active {
+  background: #A68B5B;
+}
+
+.lp-btn-icon {
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' stroke='black' stroke-width='1.5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.88.37 1.85.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.96.33 1.93.57 2.81.7A2 2 0 0122 16.92z'/%3E%3C/svg%3E");
+  -webkit-mask-size: cover;
+}
+
+.lp-skip {
+  text-align: center;
+  font-size: 13px;
+  color: #888888;
+  padding: 12px 0 4px;
+  flex-shrink: 0;
+}
+.lp-skip:active {
+  color: #555555;
+}
+
+.lp-privacy {
+  text-align: center;
+  font-size: 11px;
+  color: #BBBBBB;
+  line-height: 1.45;
+  padding: 6px 0 4px;
+  flex-shrink: 0;
+}
+.lp-link {
+  color: #C5A572;
+}
